@@ -22,7 +22,7 @@ from os.path import abspath, dirname, join
 from setuptools import find_packages, setup
 
 package_name = "elasticsearch7-compatible"
-source_package_name = "elasticsearch"
+source_package_name = "elasticsearch7"
 base_dir = abspath(dirname(__file__))
 
 with open(join(base_dir, source_package_name, "_version.py")) as f:
