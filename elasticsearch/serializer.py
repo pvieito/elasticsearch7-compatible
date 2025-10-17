@@ -47,7 +47,6 @@ try:
         np.uint64,
     )
     FLOAT_TYPES += (
-        np.float_,
         np.float16,
         np.float32,
         np.float64,

@@ -21,10 +21,11 @@ from os.path import abspath, dirname, join
 
 from setuptools import find_packages, setup
 
-package_name = "elasticsearch"
+package_name = "elasticsearch7-compatible"
+source_package_name = "elasticsearch"
 base_dir = abspath(dirname(__file__))
 
-with open(join(base_dir, package_name, "_version.py")) as f:
+with open(join(base_dir, source_package_name, "_version.py")) as f:
     package_version = re.search(
         r"__versionstr__\s+=\s+[\"\']([^\"\']+)[\"\']", f.read()
     ).group(1)
@@ -35,11 +36,11 @@ with open(join(base_dir, "README.rst")) as f:
 packages = [
     package
     for package in find_packages(where=".", exclude=("test_elasticsearch*",))
-    if package == package_name or package.startswith(package_name + ".")
+    if package == source_package_name or package.startswith(source_package_name + ".")
 ]
 
 install_requires = [
-    "urllib3>=1.21.1, <2",
+    "urllib3>=1.21.1, <3",
     "certifi",
 ]
 tests_require = [
@@ -63,17 +64,13 @@ setup(
     long_description=long_description,
     long_description_content_type="text/x-rst",
     version=package_version,
-    author="Honza Král, Nick Lang",
-    author_email="honza.kral@gmail.com, nick@nicklang.com",
-    maintainer="Seth Michael Larson",
-    maintainer_email="seth.larson@elastic.co",
     project_urls={
         "Documentation": "https://elasticsearch-py.readthedocs.io",
         "Source Code": "https://github.com/elastic/elasticsearch-py",
         "Issue Tracker": "https://github.com/elastic/elasticsearch-py/issues",
     },
     packages=packages,
-    package_data={"elasticsearch": ["py.typed", "*.pyi"]},
+    package_data={source_package_name: ["py.typed", "*.pyi"]},
     include_package_data=True,
     zip_safe=False,
     classifiers=[
